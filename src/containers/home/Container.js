@@ -95,8 +95,9 @@ class Container extends Component {
   render() {
     const { cards, lanes, orders } = this.state
     let totaldays = [...Array(30).keys()];
-    console.log(this.state)
-    return <div style={{ display: 'flex' }}>
+    // console.log(this.state)
+    return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Product Name</div>,
+    <div style={{ display: 'flex' }}>
       <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
         {orders.map((order, index) => (
           <Order
@@ -125,6 +126,7 @@ class Container extends Component {
         ))}
       </div>
     </div>
+    ]
   }
 }
 

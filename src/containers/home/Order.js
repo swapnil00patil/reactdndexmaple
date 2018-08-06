@@ -29,7 +29,7 @@ class Order extends React.Component {
 			connectDragSource &&
 			connectDragSource(
 				<div style={{ ...style, opacity }}>
-					{order.name}
+					{order.name} ({order.days}D)
 				</div>
 			)
 		)

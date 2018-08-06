@@ -34,8 +34,12 @@ class OrderInLane extends React.Component {
 					textAlign: 'center', 
 					background: 'green', 
 					height: '48px',
-					borderRight: '1px solid #000' 
-				}} key={index}></div>
+					borderRight: '1px solid #000' ,
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					fontSize: '12px'
+				}} key={index}>{order.name} ({order.days}D)</div>
 			)
 		)
 	}
