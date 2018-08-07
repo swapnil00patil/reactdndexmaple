@@ -24,27 +24,37 @@ class Container extends Component {
         { id: 4, accepts: [ItemTypes.ORDER], lastDroppedItem: null, orders: [] },
       ],
       orders: [
-        { id: 1, name: 'Order 1', type: ItemTypes.ORDER, days: 3 },
-        { id: 2, name: 'Order 2', type: ItemTypes.ORDER, days: 6 },
-        { id: 3, name: 'Order 3', type: ItemTypes.ORDER, days: 5 },
-        { id: 4, name: 'Order 4', type: ItemTypes.ORDER, days: 6 },
-        { id: 5, name: 'Order 5', type: ItemTypes.ORDER, days: 5 },
-        { id: 6, name: 'Order 6', type: ItemTypes.ORDER, days: 10 },
-        { id: 7, name: 'Order 7', type: ItemTypes.ORDER, days: 25 },
+        { id: 1, name: 'Order 1', type: ItemTypes.ORDER, days: 3, color: this.getRandomColor() },
+        { id: 2, name: 'Order 2', type: ItemTypes.ORDER, days: 6, color: this.getRandomColor() },
+        { id: 3, name: 'Order 3', type: ItemTypes.ORDER, days: 5, color: this.getRandomColor() },
+        { id: 4, name: 'Order 4', type: ItemTypes.ORDER, days: 6, color: this.getRandomColor() },
+        { id: 5, name: 'Order 5', type: ItemTypes.ORDER, days: 5, color: this.getRandomColor() },
+        { id: 6, name: 'Order 6', type: ItemTypes.ORDER, days: 10, color: this.getRandomColor() },
+        { id: 7, name: 'Order 7', type: ItemTypes.ORDER, days: 25, color: this.getRandomColor() },
       ],
       // only to maintian id
       totalOrders: 7,
       droppedOrders: [],
     }
     this.handleDrop = this.handleDrop.bind(this)
+    this.getRandomColor = this.getRandomColor.bind(this)
     this.createNewOrder = this.createNewOrder.bind(this)
   }
 
-  createNewOrder(days) {
+  createNewOrder(days, item) {
     const { totalOrders } = this.state
     const orderID = totalOrders + 1
     this.setState({totalOrders: orderID})
-    return { id: orderID, name: 'Order ' + orderID, type: ItemTypes.ORDER, days: days}
+    return { ...item, id: orderID, days: days}
+  }
+
+  getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
   }
 
   handleDrop(dropIndex, item) {
@@ -53,7 +63,7 @@ class Container extends Component {
     if(item.laneId) {
       item.originalDays = item.days
       const splitDays = Math.round(item.days / 2)
-      newItem = this.createNewOrder(item.days - splitDays)
+      newItem = this.createNewOrder(item.days - splitDays, item)
       item.days = splitDays
 
       this.setState(
@@ -96,7 +106,7 @@ class Container extends Component {
     const { cards, lanes, orders } = this.state
     let totaldays = [...Array(30).keys()];
     // console.log(this.state)
-    return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Product Name</div>,
+    return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master</div>,
     <div style={{ display: 'flex' }}>
       <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
         {orders.map((order, index) => (

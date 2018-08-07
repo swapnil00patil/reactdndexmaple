@@ -32,13 +32,13 @@ class OrderInLane extends React.Component {
 					width: order.days * 38 + 'px', 
 					flexShrink: '0', 
 					textAlign: 'center', 
-					background: 'green', 
 					height: '48px',
 					borderRight: '1px solid #000' ,
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
-					fontSize: '12px'
+					fontSize: '12px',
+					backgroundColor: order.color
 				}} key={index}>{order.name} ({order.days}D)</div>
 			)
 		)

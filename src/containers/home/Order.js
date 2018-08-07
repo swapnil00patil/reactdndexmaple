@@ -6,12 +6,11 @@ import flow from 'lodash/flow'
 
 const style = {
 	border: '1px dashed gray',
-	backgroundColor: 'white',
 	padding: '0.5rem 1rem',
 	marginRight: '1.5rem',
 	marginBottom: '1.5rem',
 	cursor: 'move',
-	float: 'left',
+	float: 'left'
 }
 
 const boxSource = {
@@ -24,11 +23,12 @@ class Order extends React.Component {
 	render() {
 		const { order, isDropped, isDragging, connectDragSource } = this.props
 		const opacity = isDragging ? 0.4 : 1
+		const backgroundColor = order.color
 
 		return (
 			connectDragSource &&
 			connectDragSource(
-				<div style={{ ...style, opacity }}>
+				<div style={{ ...style, opacity, backgroundColor }}>
 					{order.name} ({order.days}D)
 				</div>
 			)
