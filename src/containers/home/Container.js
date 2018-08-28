@@ -91,11 +91,11 @@ class Container extends Component {
     })
   }
 
-  createNewOrder(days, item) {
+  createNewOrder(days, quantity, item) {
     const { totalOrders } = this.state
     const orderID = totalOrders + 1
     this.setState({totalOrders: orderID})
-    return { ...item, id: orderID, days: days}
+    return { ...item, id: orderID, days: days, quantity: quantity}
   }
 
   getRandomColor() {
@@ -111,22 +111,19 @@ class Container extends Component {
     let newItem
     const droppedOrders = item ? { $push: [item] } : {}
     if(item.laneId) {
-      item.originalDays = item.days
       const splitDays = Math.round(item.days / 2)
-      newItem = this.createNewOrder(item.days - splitDays, item)
+      const splitQuantities = Math.round(item.quantity / 2)
+      newItem = this.createNewOrder(item.days - splitDays, item.quantity - splitQuantities, item)
       item.days = splitDays
+      item.quantity = splitQuantities
 
       this.setState(
         update(this.state, {
           lanes: {
             [dropIndex]: {
-              lastDroppedItem: {
-                $set: item,
-              },
               orders: item || newItem ? { $push: [newItem || item] } : {}
             },
-          },
-          droppedOrders,
+          }
         }),
       )
     } else {
@@ -137,10 +134,7 @@ class Container extends Component {
         update(this.state, {
           lanes: {
             [dropIndex]: {
-              lastDroppedItem: {
-                $set: item,
-              },
-              orders: item || newItem ? { $push: [newItem || item] } : {}
+              orders: item ? { $push: [item] } : {}
             },
           },
           orders: {

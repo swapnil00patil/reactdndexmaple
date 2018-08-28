@@ -59,7 +59,8 @@
           "endDate": "7-Sep-2018",
           "duration": "21",
           "orderId": "SH002",
-          "orderType": "Briefs"
+          "orderType": "Briefs",
+          "quantity": "25000"
         }
       ]
     },
@@ -67,19 +68,22 @@
       "laneId": "4",
       "itemType": "Briefs",
       "capacity": "10000",
-      "current-capacity": "9000"
+      "current-capacity": "9000",
+      "orders": []
     },
     {
       "laneId": "5",
       "itemType": "Shirts",
       "capacity": "15000",
-      "current-capacity": "14200"
+      "current-capacity": "14200",
+      "orders": []
     },
     {
       "laneId": "6",
       "itemType": "Shirts",
       "capacity": "10000",
-      "current-capacity": "10000"
+      "current-capacity": "10000",
+      "orders": []
     }
   ]
 }
