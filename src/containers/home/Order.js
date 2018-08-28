@@ -3,6 +3,7 @@ import {
 	DragSource
 } from 'react-dnd'
 import flow from 'lodash/flow'
+import { orderColors } from './constants'
 
 const style = {
 	border: '1px dashed gray',
@@ -24,7 +25,7 @@ class Order extends React.Component {
 	render() {
 		const { order, isDropped, isDragging, connectDragSource, key } = this.props
 		const opacity = isDragging ? 0.4 : 1
-		const backgroundColor = order.color
+		const backgroundColor = orderColors[order.orderId]
 
 		return (
 			connectDragSource &&

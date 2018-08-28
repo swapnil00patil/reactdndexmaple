@@ -6,6 +6,7 @@ import moment from 'moment'
 import axios from 'axios'
 
 import ProductionLane from './ProductionLane'
+import ProductionStatusLane from './ProductionStatusLane'
 import Order from './Order'
 import ItemTypes from './ItemTypes'
 const update = require('immutability-helper')
@@ -39,7 +40,6 @@ class Container extends Component {
       // droppedOrders: [],
     }
     this.handleDrop = this.handleDrop.bind(this)
-    this.getRandomColor = this.getRandomColor.bind(this)
     this.createNewOrder = this.createNewOrder.bind(this)
     this.getApis = this.getApis.bind(this);
     this.massageOrders = this.massageOrders.bind(this);
@@ -76,7 +76,6 @@ class Container extends Component {
 
   massageOrders (orders) {
     return orders.map((order) => {
-      order.color = this.getRandomColor();
       return order;
     })
   }
@@ -84,7 +83,6 @@ class Container extends Component {
   massageLanes (lanes) {
     return lanes.map((lane) => {
       lane.orders && lane.orders.map((order) => {
-        order.color = this.getRandomColor();
         order.days = Math.ceil(order.quantity / lane['current-capacity'])
       })
       return lane;
@@ -98,20 +96,15 @@ class Container extends Component {
     return { ...item, id: orderID, days: days, quantity: quantity}
   }
 
-  getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
   handleDrop(dropIndex, item) {
     let newItem
     const droppedOrders = item ? { $push: [item] } : {}
     if(item.laneId) {
       const splitDays = Math.round(item.days / 2)
+      if(splitDays === 1) {
+        alert('You cannot split single day work')
+        return
+      }
       const splitQuantities = Math.round(item.quantity / 2)
       newItem = this.createNewOrder(item.days - splitDays, item.quantity - splitQuantities, item)
       item.days = splitDays
@@ -148,7 +141,7 @@ class Container extends Component {
   }
 
   render() {
-    const { lanes, orders } = this.state
+    const { lanes, orders, productionStatus } = this.state
     let totaldays = [-5, -4, -3, -2, -1, ...Array(30).keys()];
     console.log(this.state)
     return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master</div>,
@@ -171,13 +164,22 @@ class Container extends Component {
           ))}
         </div>
         {lanes && lanes.map((lane, index) => (
-          <ProductionLane
-            onDrop={item => this.handleDrop(index, item)}
-            index={index}
-            lane={lane}
-            accepts={[lane.itemType]}
-            totaldays={totaldays.length}
-          />
+          [
+            <ProductionLane
+              onDrop={item => this.handleDrop(index, item)}
+              index={index}
+              lane={lane}
+              accepts={[lane.itemType]}
+              totaldays={totaldays.length}
+            />,
+            productionStatus.filter((status) => status.laneId === lane.laneId)
+              .map((lane) => 
+              <ProductionStatusLane
+                index={index}
+                lane={lane}
+                totaldays={totaldays.length}
+              />)
+          ]
         ))}
       </div>
     </div>

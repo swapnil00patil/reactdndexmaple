@@ -6,7 +6,7 @@ import OrderInLane from './OrderInLane'
 const style = {
 	height: '3rem',
 	marginRight: '1.5rem',
-	marginBottom: '1.5rem',
+	marginBottom: '0.1rem',
 	color: 'white',
 	textAlign: 'center',
 	fontSize: '1rem',
@@ -24,7 +24,7 @@ const dustbinTarget = {
 		const orderDays = Math.ceil(order.quantity / lane['current-capacity'])
 		let initialValue = 0
 		const daysInLane = (lane.orders && lane.orders.length > 0) ? lane.orders.reduce((accum, current) => accum + Math.round(current.quantity / lane['current-capacity']), initialValue) : 0
-		return (daysInLane + orderDays) <= totaldays
+		return (daysInLane + orderDays) <= totaldays && lane.laneId !== order.laneId
 	},
 }
 

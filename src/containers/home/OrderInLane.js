@@ -4,6 +4,8 @@ import {
 } from 'react-dnd'
 import flow from 'lodash/flow'
 
+import { orderColors } from './constants'
+
 const style = {
 	border: '1px dashed gray',
 	backgroundColor: 'white',
@@ -38,9 +40,9 @@ class OrderInLane extends React.Component {
 					alignItems: 'center',
 					justifyContent: 'center',
 					fontSize: '12px',
-					backgroundColor: order.color,
+					backgroundColor: orderColors[order.orderId],
 					marginLeft: order.dateDiff * 38 + 'px', 
-				}} key={index}>{order.orderType} ({order.quantity}D)</div>
+				}} key={index}>{order.orderType} ({order.quantity})</div>
 			)
 		)
 	}
