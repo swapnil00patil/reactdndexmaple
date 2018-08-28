@@ -10,7 +10,8 @@ const style = {
 	marginRight: '1.5rem',
 	marginBottom: '1.5rem',
 	cursor: 'move',
-	float: 'left'
+	float: 'left',
+	width: 160
 }
 
 const boxSource = {
@@ -21,22 +22,22 @@ const boxSource = {
 
 class Order extends React.Component {
 	render() {
-		const { order, isDropped, isDragging, connectDragSource } = this.props
+		const { order, isDropped, isDragging, connectDragSource, key } = this.props
 		const opacity = isDragging ? 0.4 : 1
 		const backgroundColor = order.color
 
 		return (
 			connectDragSource &&
 			connectDragSource(
-				<div style={{ ...style, opacity, backgroundColor }}>
-					{order.name} ({order.days}D)
+				<div key={key} style={{ ...style, opacity, backgroundColor }}>
+					{order.orderType} ({order.quantity}D)
 				</div>
 			)
 		)
 	}
 }
 
-export default flow([DragSource((props) => props.order.type,
+export default flow([DragSource((props) => props.order.orderType,
 	boxSource,
 	(connect, monitor) => ({
 		connectDragSource: connect.dragSource(),

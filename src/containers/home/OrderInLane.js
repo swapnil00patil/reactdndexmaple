@@ -38,14 +38,15 @@ class OrderInLane extends React.Component {
 					alignItems: 'center',
 					justifyContent: 'center',
 					fontSize: '12px',
-					backgroundColor: order.color
-				}} key={index}>{order.name} ({order.days}D)</div>
+					backgroundColor: order.color,
+					marginLeft: order.dateDiff * 38 + 'px', 
+				}} key={index}>{order.orderType} ({order.quantity}D)</div>
 			)
 		)
 	}
 }
 
-export default flow([DragSource((props) => props.order.type,
+export default flow([DragSource((props) => props.order.orderType,
 	boxSource,
 	(connect, monitor) => ({
 		connectDragSource: connect.dragSource(),

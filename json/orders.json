@@ -1,16 +1,16 @@
 {
     "orders": [
       {
-        "orderId": "BO001",
-        "orderType": "Boxer",
-        "quantity": "75000",
+        "orderId": "BO004",
+        "orderType": "Boxers",
+        "quantity": "85000",
         "client": "Arrow USA",
         "orderDate": "10-Aug-2018",
         "deliveryDate": "10-Sep-2018",
         "orderStatus": "NEW"
       },
       {
-        "orderId": "BR001",
+        "orderId": "BR005",
         "orderType": "Briefs",
         "quantity": "60000",
         "client": "Jockey (USA)",
@@ -19,7 +19,7 @@
         "orderStatus": "PROGRESS"
       },
       {
-        "orderId": "SH001",
+        "orderId": "SH002",
         "orderType": "Shirts",
         "quantity": "12000",
         "client": "Ralph Lauren (FRA)",

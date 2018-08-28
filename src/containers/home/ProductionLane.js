@@ -20,10 +20,11 @@ const dustbinTarget = {
 	},
 	canDrop(props, monitor) {
 		const { lane, totaldays } = props
-		const droppingItem = monitor.getItem()
+		const order = monitor.getItem()
+		const orderDays = Math.ceil(order.quantity / lane['current-capacity'])
 		let initialValue = 0
-		const daysInLane = lane.orders.length > 0 ? lane.orders.reduce((accum, current) => accum + current.days, initialValue) : 0
-		return (daysInLane + droppingItem.days) <= totaldays
+		const daysInLane = (lane.orders && lane.orders.length > 0) ? lane.orders.reduce((accum, current) => accum + Math.round(current.quantity / lane['current-capacity']), initialValue) : 0
+		return (daysInLane + orderDays) <= totaldays
 	},
 }
 
@@ -34,7 +35,8 @@ class ProductionLane extends React.Component {
 			canDrop,
 			connectDropTarget,
 			lane,
-			totaldays
+			totaldays,
+			index
 		} = this.props
 		const isActive = isOver && canDrop
 
@@ -47,8 +49,8 @@ class ProductionLane extends React.Component {
 
 		return (
 			connectDropTarget &&
-			connectDropTarget(<div style={{ ...style, backgroundColor, width: totaldays * 38 + 'px' }}>
-				{lane.orders.map((order, index) => <OrderInLane index={index} order={order} /> )}
+			connectDropTarget(<div key={index} style={{ ...style, backgroundColor, width: totaldays * 38 + 'px' }}>
+				{lane.orders && lane.orders.map((order, index) => <OrderInLane index={index} order={order} /> )}
 			</div>)
 		)
 	}
