@@ -1,30 +1,31 @@
-{ "orders" : [ 
-    {
-        "orderId" : "BO001",
+{
+    "orders": [
+      {
+        "orderId": "BO001",
         "orderType": "Boxer",
         "quantity": "75000",
-        "client" : "Arrow USA",
-        "orderDate" : "10-Aug-2018",
-        "deliveryDate" : "10-Sep-2018",
-        "orderStatus" : "NEW"
-    },
-    {
-        "orderId" : "BR001",
+        "client": "Arrow USA",
+        "orderDate": "10-Aug-2018",
+        "deliveryDate": "10-Sep-2018",
+        "orderStatus": "NEW"
+      },
+      {
+        "orderId": "BR001",
         "orderType": "Briefs",
         "quantity": "60000",
-        "client" : "Jockey (USA)",
-        "orderDate" : "12-Aug-2018",
-        "deliveryDate" : "12-Sep-2018",
-        "orderStatus" : "PROGRESS"
-    },
-    {
-        "orderId" : "SH001",
+        "client": "Jockey (USA)",
+        "orderDate": "12-Aug-2018",
+        "deliveryDate": "12-Sep-2018",
+        "orderStatus": "PROGRESS"
+      },
+      {
+        "orderId": "SH001",
         "orderType": "Shirts",
         "quantity": "12000",
-        "client" : "Ralph Lauren (FRA)",
-        "orderDate" : "08-Aug-2018",
-        "deliveryDate" : "15-Sep-2018",
-        "orderStatus" : "PROGRESS"
-    }
-]
-}
+        "client": "Ralph Lauren (FRA)",
+        "orderDate": "08-Aug-2018",
+        "deliveryDate": "15-Sep-2018",
+        "orderStatus": "PROGRESS"
+      }
+    ]
+  }

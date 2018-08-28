@@ -3,7 +3,7 @@
   "homepage": "https://create-react-app-redux.now.sh",
   "scripts": {
     "deploy": "now && now alias",
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"static-server ./json --cors '*'\" ",
     "now-start": "serve -s ./build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
@@ -11,10 +11,12 @@
     "precommit": "pretty-quick --staged"
   },
   "devDependencies": {
+    "concurrently": "^4.0.1",
     "prettier": "1.14.0",
     "react-scripts": "1.1.4"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "connected-react-router": "4.3.0",
     "immutability-helper": "^2.7.1",
     "moment": "^2.22.2",
