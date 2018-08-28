@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend, { NativeTypes } from 'react-dnd-html5-backend'
 import moment from 'moment'
+import axios from 'axios'
 
 import ProductionLane from './ProductionLane'
 import Order from './Order'
@@ -12,6 +13,7 @@ const update = require('immutability-helper')
 const style = {
   width: 400,
 }
+const baseUrl = "http://localhost:9080/";
 
 class Container extends Component {
   constructor(props) {
@@ -39,6 +41,24 @@ class Container extends Component {
     this.handleDrop = this.handleDrop.bind(this)
     this.getRandomColor = this.getRandomColor.bind(this)
     this.createNewOrder = this.createNewOrder.bind(this)
+    this.getApis = this.getApis.bind(this);
+  }
+
+  componentWillMount () {
+    // this.getApis();
+  }
+
+  getApis () {
+    let apis = ['loadingPlan', 'lanes',  'orders', 'productionStatus'];
+    apis.forEach((api) => {
+      axios.get(baseUrl + api + '.json')
+      .then((response) => {
+        // handle success
+        const res = JSON.parse(JSON.stringify(response.data));
+        console.log(res[api]);
+        this.setState({[api]: res[api]})
+      });
+    })
   }
 
   createNewOrder(days, item) {
@@ -105,7 +125,7 @@ class Container extends Component {
   render() {
     const { cards, lanes, orders } = this.state
     let totaldays = [...Array(30).keys()];
-    // console.log(this.state)
+    console.log(this.state)
     return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master</div>,
     <div style={{ display: 'flex' }}>
       <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
