@@ -1,0 +1,40 @@
+{
+    "productionStatus" : [
+        {
+            "lane":"1",
+            "startDate": "18-Aug-2018",
+            "endDate": "22-Aug-2018",
+            "duration" : "5",
+            "orderId" : "BO001",
+            "plannedQty": "75000",
+            "completedQty": "45000"
+        },
+        {
+            "lane":"1",
+            "startDate": "23-Aug-2018",
+            "endDate": "7-Sep-2018",
+            "duration" : "16",
+            "orderId" : "BO002",
+            "plannedQty": "240000",
+            "completedQty": "0"
+        },        
+        {
+            "lane":"2",
+            "startDate": "18-Aug-2018",
+            "endDate": "7-Sep-2018",
+            "duration" : "21",
+            "orderId" : "BR001",
+            "plannedQty": "210000",
+            "completedQty": "30000"
+        },
+        {
+            "lane":"3",
+            "startDate": "18-Aug-2018",
+            "endDate": "7-Sep-2018",
+            "duration" : "21",
+            "orderId" : "SH002",
+            "plannedQty": "105000",
+            "completedQty": "14200" /* This row to be shown in red as expected output is 15000 */
+        }        
+    ]
+}

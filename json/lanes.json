@@ -1,0 +1,40 @@
+{
+    "lanes" : [
+    {
+        "laneId" : "1",
+        "itemType" : "Boxers",
+        "capacity" : "15000",
+        "current-capacity": "14200"
+    },
+    {
+        "laneId" : "2",
+        "itemType" : "Boxers",
+        "capacity" : "10000",
+        "current-capacity": "10000"
+    },
+    {
+        "laneId" : "3",
+        "itemType" : "Briefs",
+        "capacity" : "15000",
+        "current-capacity": "15000"
+    },
+    {
+        "laneId" : "4",
+        "itemType" : "Briefs",
+        "capacity" : "10000",
+        "current-capacity": "9000"
+    },
+        {
+        "laneId" : "5",
+        "itemType" : "Shirts",
+        "capacity" : "15000",
+        "current-capacity": "14200"
+    },
+    {
+        "laneId" : "6",
+        "itemType" : "Shirts",
+        "capacity" : "10000",
+        "current-capacity": "10000"
+    }
+]
+}
