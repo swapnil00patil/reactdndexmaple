@@ -42,7 +42,7 @@ class OrderInLane extends React.Component {
 					fontSize: '12px',
 					backgroundColor: orderColors[order.orderId],
 					marginLeft: order.dateDiff * 38 + 'px', 
-				}} key={index}>{order.orderType} ({order.quantity})</div>
+				}} key={index}>{order.orderType}</div>
 			)
 		)
 	}

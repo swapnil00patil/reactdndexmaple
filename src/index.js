@@ -6,6 +6,7 @@ import store, { history } from './store'
 import App from './containers/app'
 
 import 'sanitize.css/sanitize.css'
+import 'rc-tooltip/assets/bootstrap_white.css'
 import './index.css'
 
 const target = document.querySelector('#root')
