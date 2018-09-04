@@ -4,7 +4,7 @@ import Tooltip from 'rc-tooltip';
 import TooltipTemplate from './TooltipTemplate'
 
 const style = {
-	height: '3rem',
+	height: '2rem',
 	marginRight: '1.5rem',
 	marginBottom: '1rem',
 	color: 'white',
@@ -25,9 +25,8 @@ class ProductionStatusLane extends React.Component {
 
 		let backgroundColor = '#222'
 		if (isActive) {
-			backgroundColor = 'darkgreen'
+			backgroundColor = 'lightgray'
 		}
-console.log(lane.orders)
 		return <div key={index} style={{ ...style, backgroundColor, width: totaldays * 38 + 'px' }}>
 			{lane.orders && lane.orders.map((order, index) => {
 				const days = (Math.round(order.completedQty / lane['current-capacity']))
@@ -43,7 +42,7 @@ console.log(lane.orders)
 						width: days * 38 + 'px',
 						flexShrink: '0',
 						textAlign: 'center',
-						height: '48px',
+						height: '2rem',
 						borderRight: '1px solid #000',
 						display: 'flex',
 						alignItems: 'center',
