@@ -5,6 +5,7 @@ import {
 import flow from 'lodash/flow'
 
 import { orderColors } from './constants'
+import TooltipTemplate from './TooltipTemplate'
 
 const style = {
 	border: '1px dashed gray',
@@ -23,27 +24,43 @@ const boxSource = {
 }
 
 class OrderInLane extends React.Component {
+	constructor (props) {
+		super(props)
+		this.state = {
+			tooltip: false
+		}
+	}
+
 	render() {
 		const { order, isDragging, connectDragSource, index } = this.props
 		const opacity = isDragging ? 0.4 : 1
 
-		return (
-			connectDragSource &&
-			connectDragSource(
-				<div style={{ 
-					width: order.days * 38 + 'px', 
-					flexShrink: '0', 
-					textAlign: 'center', 
-					height: '48px',
-					borderRight: '1px solid #000' ,
-					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'center',
-					fontSize: '12px',
-					backgroundColor: orderColors[order.orderId],
-					marginLeft: order.dateDiff * 38 + 'px', 
-				}} key={index}>{order.orderType}</div>
-			)
+		return (<div onMouseEnter={(() => this.setState({tooltip:true}))} onMouseLeave={(() => this.setState({tooltip:false}))} style={{position: 'relative'}}>
+			{/* { this.state.tooltip && <TooltipTemplate rows={[
+				{title: 'Client', value: order.client},
+				{title: 'Completed', value: order.completedQty},
+				{title: 'Planned', value: order.plannedQty},
+				{title: 'Start', value: order.startDate},
+				{title: 'End', value: order.endDate}
+			]} /> } */}
+			{connectDragSource &&
+				connectDragSource(
+					<div style={{ 
+						width: order.days * 38 + 'px', 
+						flexShrink: '0', 
+						textAlign: 'center', 
+						height: '2rem',
+						borderRight: '1px solid #000' ,
+						display: 'flex',
+						alignItems: 'center',
+						justifyContent: 'center',
+						fontSize: '12px',
+						backgroundColor: orderColors[order.orderId],
+						marginLeft: order.dateDiff * 38 + 'px'
+					}} key={index}>
+					{order.orderType}</div>
+			)}
+			</div>
 		)
 	}
 }

@@ -137,3 +137,19 @@ input:focus {
   color: #fff;
   background: #903838;
 }
+
+.tooltiptext {
+  width: 200px;
+  background-color: black;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  font-size: 13px;
+  top: -28px;
+  left: 100%;
+}

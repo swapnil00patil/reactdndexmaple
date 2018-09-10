@@ -1,10 +1,9 @@
 import * as React from 'react'
 import { orderColors } from './constants'
-import Tooltip from 'rc-tooltip';
 import TooltipTemplate from './TooltipTemplate'
 
 const style = {
-	height: '2rem',
+	height: '1rem',
 	marginRight: '1.5rem',
 	marginBottom: '1rem',
 	color: 'white',
@@ -15,6 +14,13 @@ const style = {
 }
 
 class ProductionStatusLane extends React.Component {
+	constructor (props) {
+		super(props)
+		this.state = {
+			tooltip: false
+		}
+	}
+
 	render() {
 		const {
 			lane,
@@ -30,19 +36,12 @@ class ProductionStatusLane extends React.Component {
 		return <div key={index} style={{ ...style, backgroundColor, width: totaldays * 38 + 'px' }}>
 			{lane.orders && lane.orders.map((order, index) => {
 				const days = (Math.round(order.completedQty / lane['current-capacity']))
-				return days !== 0 && 
-				<Tooltip trigger={['hover']} overlay={<TooltipTemplate rows={[
-					{title: 'Client', value: order.client},
-					{title: 'Completed', value: order.completedQty},
-					{title: 'Planned', value: order.plannedQty},
-					{title: 'Start', value: order.startDate},
-					{title: 'End', value: order.endDate}
-				]} />}>
+				return days !== 0 &&
 					<div style={{
 						width: days * 38 + 'px',
 						flexShrink: '0',
 						textAlign: 'center',
-						height: '2rem',
+						height: '1rem',
 						borderRight: '1px solid #000',
 						display: 'flex',
 						alignItems: 'center',
@@ -50,10 +49,17 @@ class ProductionStatusLane extends React.Component {
 						fontSize: '12px',
 						backgroundColor: orderColors[order.orderId],
 						marginLeft: order.dateDiff * 38 + 'px',
-					}} key={index}>
+						position: 'relative'
+					}} key={index} onMouseEnter={(() => this.setState({tooltip:true}))} onMouseLeave={(() => this.setState({tooltip:false}))}>
+					{ this.state.tooltip && <TooltipTemplate rows={[
+						{title: 'Client', value: order.client},
+						{title: 'Completed', value: order.completedQty},
+						{title: 'Planned', value: order.plannedQty},
+						{title: 'Start', value: order.startDate},
+						{title: 'End', value: order.endDate}
+					]} /> }
 						{Math.round((order.completedQty/order.plannedQty)*100)}%
 					</div>
-				</Tooltip>
 			}
 			)}
 		</div>

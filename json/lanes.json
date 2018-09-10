@@ -47,6 +47,42 @@
       ]
     },
     {
+      "laneId": "2",
+      "itemType": "Boxers",
+      "capacity": "10000",
+      "current-capacity": "10000",
+      "orders": [
+        {
+          "laneId": "2",
+          "startDate": "18-Aug-2018",
+          "dateDiff": "0",
+          "endDate": "7-Sep-2018",
+          "duration": "21",
+          "orderId": "BR001",
+          "orderType": "Boxers",
+          "quantity": "75000"
+        }
+      ]
+    },
+    {
+      "laneId": "2",
+      "itemType": "Boxers",
+      "capacity": "10000",
+      "current-capacity": "10000",
+      "orders": [
+        {
+          "laneId": "2",
+          "startDate": "18-Aug-2018",
+          "dateDiff": "0",
+          "endDate": "7-Sep-2018",
+          "duration": "21",
+          "orderId": "BR001",
+          "orderType": "Boxers",
+          "quantity": "75000"
+        }
+      ]
+    },
+    {
       "laneId": "3",
       "itemType": "Briefs",
       "capacity": "15000",
@@ -70,6 +106,60 @@
       "capacity": "10000",
       "current-capacity": "9000",
       "orders": []
+    },
+    {
+      "laneId": "3",
+      "itemType": "Briefs",
+      "capacity": "15000",
+      "current-capacity": "15000",
+      "orders": [
+        {
+          "laneId": "3",
+          "startDate": "18-Aug-2018",
+          "dateDiff": "3",
+          "endDate": "7-Sep-2018",
+          "duration": "21",
+          "orderId": "SH002",
+          "orderType": "Briefs",
+          "quantity": "25000"
+        }
+      ]
+    },
+    {
+      "laneId": "3",
+      "itemType": "Briefs",
+      "capacity": "15000",
+      "current-capacity": "15000",
+      "orders": [
+        {
+          "laneId": "3",
+          "startDate": "18-Aug-2018",
+          "dateDiff": "3",
+          "endDate": "7-Sep-2018",
+          "duration": "21",
+          "orderId": "SH002",
+          "orderType": "Briefs",
+          "quantity": "25000"
+        }
+      ]
+    },
+    {
+      "laneId": "3",
+      "itemType": "Briefs",
+      "capacity": "15000",
+      "current-capacity": "15000",
+      "orders": [
+        {
+          "laneId": "3",
+          "startDate": "18-Aug-2018",
+          "dateDiff": "3",
+          "endDate": "7-Sep-2018",
+          "duration": "21",
+          "orderId": "SH002",
+          "orderType": "Briefs",
+          "quantity": "25000"
+        }
+      ]
     },
     {
       "laneId": "5",

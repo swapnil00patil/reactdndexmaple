@@ -4,7 +4,7 @@ import flow from 'lodash/flow'
 import OrderInLane from './OrderInLane'
 
 const style = {
-	height: '3rem',
+	height: '2rem',
 	marginRight: '1.5rem',
 	marginBottom: '0.1rem',
 	color: 'white',
