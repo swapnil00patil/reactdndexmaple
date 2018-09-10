@@ -1,15 +1,41 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { history } from '../../store'
 
-const Login = () => (
-  <div class="log-form">
-    <h2>Login</h2>
-    <form>
-      <input type="text" title="username" placeholder="username" />
-      <input type="password" title="username" placeholder="password" />
-      <button type="submit" class="btn" onClick={() => history.push('/home')}>Login</button>
-    </form>
-  </div>
-)
+class Login extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      shake: ''
+    }
+
+    this.submitLogin = this.submitLogin.bind(this)
+  }
+
+  submitLogin (e) {
+    this.setState({
+      shake: 'shake-it'
+    })
+    setTimeout(() => {
+        this.setState({
+          shake: ''
+        }) 
+    }, 1000)
+    // history.push('/home')
+    e.preventDefault();
+  }
+
+  render() {
+    return (
+      <div className={`log-form ${this.state.shake}`}>
+        <h2>Login</h2>
+        <form>
+          <input type="text" title="username" placeholder="username" />
+          <input type="password" title="username" placeholder="password" />
+          <button type="submit" className="btn" onClick={this.submitLogin}>Login</button>
+        </form>
+      </div>
+    )
+  }
+}
 
 export default Login
