@@ -153,3 +153,11 @@ input:focus {
   top: -28px;
   left: 100%;
 }
+
+#fullscreen-button {
+  align-self: flex-end;
+  margin-left: auto;
+  background: none;
+  cursor: pointer;
+  border: none;
+}

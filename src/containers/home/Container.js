@@ -33,6 +33,26 @@ class Container extends Component {
     this.getApis();
   }
 
+  componentDidMount () {
+    var fullscreenButton = document.getElementById("fullscreen-button");
+    var fullscreenDiv    = document.getElementById("fullscreen");
+    var fullscreenFunc   = fullscreenDiv.requestFullscreen;
+
+    if (!fullscreenFunc) {
+      ['mozRequestFullScreen',
+      'msRequestFullscreen',
+      'webkitRequestFullScreen'].forEach(function (req) {
+        fullscreenFunc = fullscreenFunc || fullscreenDiv[req];
+      });
+    }
+
+    function enterFullscreen() {
+      fullscreenFunc.call(fullscreenDiv);
+    }
+
+    fullscreenButton.addEventListener('click', enterFullscreen);
+  }
+
   getApis() {
     let apis = ['lanes', 'orders', 'productionStatus'];
     let promises = []
@@ -137,10 +157,10 @@ class Container extends Component {
 
   render() {
     const { lanes, orders, productionStatus } = this.state
-    let totaldays = [-5, -4, -3, -2, -1, ...Array(30).keys()];
-    console.log(this.state)
-    return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master</div>,
-    <div style={{ display: 'flex' }}>
+    let totaldays = [-5, -4, -3, -2, -1, ...Array(25).keys()];
+
+    return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master<button id="fullscreen-button">Enter Fullscreen</button></div>,
+    <div style={{ display: 'flex' }} id="fullscreen">
       <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
         {orders && orders.map((order, index) => (
           <Order
@@ -151,7 +171,7 @@ class Container extends Component {
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div style={{ display: 'flex', flexDirection: 'row', flexShrink: 0 }}>
           {totaldays.map((day, index) => (
             <div style={{ background: day === 0 ? 'green' : 'white', width: '38px', flexShrink: '0', textAlign: 'center', borderTop: '1px solid #ccc', borderRight: '1px solid #ccc' }} key={index}>
               {moment().add(day, 'days').format("MMM D")}
@@ -159,7 +179,7 @@ class Container extends Component {
           ))}
         </div>
 
-        <div style={{}}>
+        <div style={{display: 'flex', flexDirection: 'column'}}>
           {lanes && lanes.map((lane, index) => (
             [
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
