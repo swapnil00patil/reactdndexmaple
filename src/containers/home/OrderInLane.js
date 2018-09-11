@@ -36,13 +36,12 @@ class OrderInLane extends React.Component {
 		const opacity = isDragging ? 0.4 : 1
 
 		return (<div onMouseEnter={(() => this.setState({tooltip:true}))} onMouseLeave={(() => this.setState({tooltip:false}))} style={{position: 'relative'}}>
-			{/* { this.state.tooltip && <TooltipTemplate rows={[
+			{ this.state.tooltip && <TooltipTemplate rows={[
 				{title: 'Client', value: order.client},
-				{title: 'Completed', value: order.completedQty},
-				{title: 'Planned', value: order.plannedQty},
+				{title: 'Quantity', value: order.quantity},
 				{title: 'Start', value: order.startDate},
 				{title: 'End', value: order.endDate}
-			]} /> } */}
+			]} /> }
 			{connectDragSource &&
 				connectDragSource(
 					<div style={{ 

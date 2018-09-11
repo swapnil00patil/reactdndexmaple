@@ -160,7 +160,7 @@ class Container extends Component {
     let totaldays = [-5, -4, -3, -2, -1, ...Array(25).keys()];
 
     return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master<button id="fullscreen-button">Enter Fullscreen</button></div>,
-    <div style={{ display: 'flex' }} id="fullscreen">
+    <div style={{ display: 'flex', overflow: 'auto' }} id="fullscreen">
       <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
         {orders && orders.map((order, index) => (
           <Order
@@ -179,7 +179,7 @@ class Container extends Component {
           ))}
         </div>
 
-        <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div style={{display: 'flex', flexDirection: 'column', flexShrink: 0}}>
           {lanes && lanes.map((lane, index) => (
             [
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
