@@ -32,8 +32,9 @@ class OrderInLane extends React.Component {
 	}
 
 	render() {
-		const { order, isDragging, connectDragSource, index } = this.props
+		const { order, isDragging, connectDragSource, index, lane } = this.props
 		const opacity = isDragging ? 0.4 : 1
+		order.laneCapacity = lane['current-capacity'];
 
 		return (<div onMouseEnter={(() => this.setState({tooltip:true}))} onMouseLeave={(() => this.setState({tooltip:false}))} style={{position: 'relative'}}>
 			{ this.state.tooltip && <TooltipTemplate rows={[

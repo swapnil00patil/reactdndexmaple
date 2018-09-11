@@ -56,7 +56,8 @@ class ProductionStatusLane extends React.Component {
 						{title: 'Completed', value: order.completedQty},
 						{title: 'Planned', value: order.plannedQty},
 						{title: 'Start', value: order.startDate},
-						{title: 'End', value: order.endDate}
+						{title: 'End', value: order.endDate},
+						{title: 'Capacity', value: lane['current-capacity']}
 					]} /> }
 						{Math.round((order.completedQty/order.plannedQty)*100)}%
 					</div>

@@ -92,11 +92,11 @@ class Container extends Component {
     })
   }
 
-  createNewOrder(days, quantity, item) {
+  createNewOrder(droppedLane, quantity, item) {
     const { totalOrders } = this.state
-    const orderID = totalOrders + 1
+    const orderID = Number(totalOrders) + 1
     this.setState({ totalOrders: orderID })
-    return { ...item, id: orderID, days: days, quantity: quantity }
+    return { ...item, id: orderID, days: Math.ceil(quantity / droppedLane['current-capacity']), quantity: quantity, dateDiff: 0 }
   }
 
   getCompleteQuantity (planned) {
@@ -114,22 +114,26 @@ class Container extends Component {
     let newItem
     const droppedOrders = item ? { $push: [item] } : {}
     if (item.laneId) {
-      const splitDays = Math.round(item.days / 2)
       if (splitDays === 1) {
         alert('You cannot split single day work')
         return
       }
       
-      const splitQuantities = Math.round((item.quantity - this.getCompleteQuantity(item)) / 2)
-      newItem = this.createNewOrder(item.days - splitDays, (item.quantity - this.getCompleteQuantity(item)) - splitQuantities, item)
-      item.days = splitDays
-      item.quantity = splitQuantities
+      const completedQty =  this.getCompleteQuantity(item);
+      const completedDays =  Math.round(completedQty / item.laneCapacity);
+
+      const splitQuantities = Math.round((item.quantity - completedQty) / 2)
+      const splitDays = Math.round((item.days - completedDays) / 2)
+      newItem = this.createNewOrder(this.state.lanes[dropIndex], (item.quantity - completedQty) - splitQuantities, item)
+      console.log(newItem)
+      item.days = splitDays + completedDays
+      item.quantity = Number(splitQuantities) + Number(completedQty)
 
       this.setState(
         update(this.state, {
           lanes: {
             [dropIndex]: {
-              orders: item || newItem ? { $push: [newItem || item] } : {}
+              orders: item || newItem ? { $push: [newItem || Object.assign({}, item)] } : {}
             },
           }
         }),
@@ -172,6 +176,7 @@ class Container extends Component {
 
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
         <div style={{ display: 'flex', flexDirection: 'row', flexShrink: 0 }}>
+          <div style={{ flexShrink: 0, paddingRight: 10, width: 60 }}></div>
           {totaldays.map((day, index) => (
             <div style={{ background: day === 0 ? 'green' : 'white', width: '38px', flexShrink: '0', textAlign: 'center', borderTop: '1px solid #ccc', borderRight: '1px solid #ccc' }} key={index}>
               {moment().add(day, 'days').format("MMM D")}

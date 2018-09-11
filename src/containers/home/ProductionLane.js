@@ -24,7 +24,7 @@ const dustbinTarget = {
 		const orderDays = Math.ceil(order.quantity / lane['current-capacity'])
 		let initialValue = 0
 		const daysInLane = (lane.orders && lane.orders.length > 0) ? lane.orders.reduce((accum, current) => accum + Math.round(current.quantity / lane['current-capacity']), initialValue) : 0
-		return (daysInLane + orderDays) <= totaldays && lane.laneId !== order.laneId
+		return (daysInLane + orderDays) <= totaldays
 	},
 }
 
@@ -50,7 +50,7 @@ class ProductionLane extends React.Component {
 		return (
 			connectDropTarget &&
 			connectDropTarget(<div key={index} style={{ ...style, backgroundColor, width: totaldays * 38 + 'px' }}>
-				{lane.orders && lane.orders.map((order, index) => <OrderInLane index={index} order={order} /> )}
+				{lane.orders && lane.orders.map((order, index) => <OrderInLane lane={lane} index={index} order={order} /> )}
 			</div>)
 		)
 	}
