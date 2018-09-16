@@ -27,6 +27,7 @@ class Container extends Component {
     this.massageOrders = this.massageOrders.bind(this);
     this.massageLanes = this.massageLanes.bind(this);
     this.getCompleteQuantity = this.getCompleteQuantity.bind(this);
+    this.combineInProgressOrders = this.combineInProgressOrders.bind(this);
   }
 
   componentWillMount() {
@@ -54,7 +55,7 @@ class Container extends Component {
   }
 
   getApis() {
-    let apis = ['lanes', 'orders', 'productionStatus'];
+    let apis = ['lanes', 'orders'];
     let promises = []
     apis.forEach((api) => {
       promises.push(
@@ -69,10 +70,10 @@ class Container extends Component {
       )
     })
     Promise.all(promises).then((values) => {
+      this.combineInProgressOrders(values[0], true);
       this.setState({
         lanes: this.massageLanes(values[0]),
-        orders: this.massageOrders(values[1]),
-        productionStatus: values[2]
+        orders: this.massageOrders(values[1])
       })
     });
   }
@@ -101,10 +102,10 @@ class Container extends Component {
 
   getCompleteQuantity (planned) {
     let orderFound;
-    this.state.productionStatus.some((production) => {
-      return production.orders.some((order) => {
+    this.state.lanes.some((lane) => {
+      return lane.orders.some((order) => {
         orderFound = order;
-        return order.orderId === planned.orderId;
+        return order.isStarted && order.orderId === planned.orderId;
       }) 
     })
     return (orderFound && orderFound.completedQty) || 0;
@@ -125,7 +126,7 @@ class Container extends Component {
       const splitQuantities = Math.round((item.quantity - completedQty) / 2)
       const splitDays = Math.round((item.days - completedDays) / 2)
       newItem = this.createNewOrder(this.state.lanes[dropIndex], (item.quantity - completedQty) - splitQuantities, item)
-      console.log(newItem)
+
       item.days = splitDays + completedDays
       item.quantity = Number(splitQuantities) + Number(completedQty)
 
@@ -159,19 +160,63 @@ class Container extends Component {
     }
   }
 
+  combineInProgressOrders(lanes, update) {
+    let inProgressOrders = {};
+    if(!lanes) return;
+    lanes.forEach((lane) => {
+      lane.orders.forEach((order) => {
+        if(inProgressOrders[order.orderId]) {
+          inProgressOrders[order.orderId].totalQuantity += Number(order.plannedQty);
+          inProgressOrders[order.orderId].completedQuantity += Number(order.completedQty);
+        } else {
+          inProgressOrders[order.orderId] = order; 
+          inProgressOrders[order.orderId].totalQuantity = Number(order.plannedQty);
+          inProgressOrders[order.orderId].completedQuantity = Number(order.completedQty);
+        }
+      })
+    })
+    if(update) {
+      this.setState({
+        inProgressOrders: inProgressOrders
+      })
+    } else {
+      return inProgressOrders;
+    }
+  }
+
   render() {
-    const { lanes, orders, productionStatus } = this.state
+    const { lanes, orders, inProgressOrders } = this.state
+
+    // update inprogress orders on left
+    let currentInProgressOrders = this.combineInProgressOrders(lanes);
+    if(currentInProgressOrders && Object.keys(currentInProgressOrders).length !== Object.keys(inProgressOrders).length) {
+      this.combineInProgressOrders(lanes, true);
+    }
+
     let totaldays = [-5, -4, -3, -2, -1, ...Array(25).keys()];
 
     return [<div style={{ display: 'flex', width: '100%', padding: '25px', background: 'grey', margin: '0 0 20px 0' }}> Production Line Master<button id="fullscreen-button">Enter Fullscreen</button></div>,
     <div style={{ display: 'flex', overflow: 'auto' }} id="fullscreen">
-      <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
-        {orders && orders.map((order, index) => (
-          <Order
-            order={order}
-            key={index}
-          />
-        ))}
+      <div style={{ display: 'flex', overflow: 'auto', flexDirection: 'column' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
+          {orders && orders.map((order, index) => (
+            <Order
+              order={order}
+              key={index}
+            />
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 15px 25px' }}>
+        ------- In Progress -------
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', width: '300px', padding: '0 0 0 25px' }}>
+          {inProgressOrders && Object.keys(inProgressOrders).map(key => 
+              <Order
+                order={inProgressOrders[key]}
+                key={key}
+              />
+          )}
+        </div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
@@ -187,7 +232,7 @@ class Container extends Component {
         <div style={{display: 'flex', flexDirection: 'column', flexShrink: 0}}>
           {lanes && lanes.map((lane, index) => (
             [
-              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+              <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: '1rem' }}>
                 <div style={{ flexShrink: 0, paddingRight: 10, width: 60 }}>{lane.itemType}</div>
                 <ProductionLane
                   onDrop={item => this.handleDrop(index, item)}
@@ -199,13 +244,11 @@ class Container extends Component {
               </div>,
               <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <div style={{ flexShrink: 0, paddingRight: 10, width: 60 }}></div>
-                {productionStatus.filter((status) => status.laneId === lane.laneId)
-                  .map((lane) =>
                     <ProductionStatusLane
                       index={index}
                       lane={lane}
                       totaldays={totaldays.length}
-                    />)}
+                    />
               </div>
             ]
           ))}

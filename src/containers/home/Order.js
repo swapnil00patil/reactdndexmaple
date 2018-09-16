@@ -28,6 +28,27 @@ class Order extends React.Component {
 		this.state = {
 			tooltip: false
 		}
+		this.bakeTooltip = this.bakeTooltip.bind(this);
+	}
+
+	bakeTooltip (order) {
+		let data = [];
+		data.push({ title: 'Client', value: order.client });
+		if(order.orderDate) {
+			data.push({ title: 'Order Date', value: order.orderDate });
+		}
+		if(order.deliveryDate) {
+			data.push({ title: 'Delivery Date', value: order.deliveryDate });
+		}
+		if(order.totalQuantity) {
+			data.push({ title: 'Planned', value: order.totalQuantity });
+		} else if(order.quantity) {
+			data.push({ title: 'Quantity', value: order.quantity });
+		}
+		if(order.completedQuantity) {
+			data.push({ title: 'Completed', value: order.completedQuantity });
+		}
+		return data;
 	}
 
 	render() {
@@ -35,12 +56,8 @@ class Order extends React.Component {
 		const opacity = isDragging ? 0.4 : 1
 		const backgroundColor = orderColors[order.orderId]
 		return (<div onMouseEnter={(() => this.setState({ tooltip: true }))} onMouseLeave={(() => this.setState({ tooltip: false }))} style={{ position: 'relative' }}>
-			{this.state.tooltip && <TooltipTemplate rows={[
-				{ title: 'Client', value: order.client },
-				{ title: 'Order Date', value: order.orderDate },
-				{ title: 'Delivery Date', value: order.deliveryDate },
-				{ title: 'Quantity', value: order.quantity }
-			]} />}
+			{this.state.tooltip && <TooltipTemplate
+			style={{top: 44 ,left: 0}} rows={this.bakeTooltip(order)} />}
 			{connectDragSource &&
 				connectDragSource(
 					<div key={key} style={{ ...style, opacity, backgroundColor }}>

@@ -5,7 +5,6 @@ import TooltipTemplate from './TooltipTemplate'
 const style = {
 	height: '1rem',
 	marginRight: '1.5rem',
-	marginBottom: '1rem',
 	color: 'white',
 	textAlign: 'center',
 	fontSize: '1rem',
@@ -35,6 +34,9 @@ class ProductionStatusLane extends React.Component {
 		}
 		return <div key={index} style={{ ...style, backgroundColor, width: totaldays * 38 + 'px' }}>
 			{lane.orders && lane.orders.map((order, index) => {
+				if(!order.isStarted) {
+					return null;
+				}
 				const days = (Math.round(order.completedQty / lane['current-capacity']))
 				return days !== 0 &&
 					<div style={{
@@ -47,7 +49,7 @@ class ProductionStatusLane extends React.Component {
 						alignItems: 'center',
 						justifyContent: 'center',
 						fontSize: '12px',
-						backgroundColor: orderColors[order.orderId],
+						backgroundColor: order.isBehind ? 'red' : orderColors[order.orderId],
 						marginLeft: order.dateDiff * 38 + 'px',
 						position: 'relative'
 					}} key={index} onMouseEnter={(() => this.setState({tooltip:true}))} onMouseLeave={(() => this.setState({tooltip:false}))}>

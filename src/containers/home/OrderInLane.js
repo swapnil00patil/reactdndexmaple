@@ -41,7 +41,8 @@ class OrderInLane extends React.Component {
 				{title: 'Client', value: order.client},
 				{title: 'Quantity', value: order.quantity},
 				{title: 'Start', value: order.startDate},
-				{title: 'End', value: order.endDate}
+				{title: 'End', value: order.endDate},
+				{title: 'Order ID', value: order.orderId}
 			]} /> }
 			{connectDragSource &&
 				connectDragSource(

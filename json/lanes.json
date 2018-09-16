@@ -15,7 +15,10 @@
           "duration": "5",
           "orderId": "BO001",
           "orderType": "Boxers",
-          "quantity": "75000"
+          "quantity": "35000",
+          "isStarted": true,
+          "plannedQty": "35000",
+          "completedQty": "25000"
         },
         {
           "laneId": "1",
@@ -26,7 +29,10 @@
           "duration": "16",
           "orderId": "BO002",
           "orderType": "Boxers",
-          "quantity": "75000"
+          "quantity": "240000",
+          "isStarted": true,
+          "plannedQty": "240000",
+          "completedQty": "0"
         }
       ]
     },
@@ -43,9 +49,12 @@
           "client": "Jockey USA",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "BR001",
+          "orderId": "BO001",
           "orderType": "Boxers",
-          "quantity": "75000"
+          "quantity": "45000",
+          "isStarted": true,
+          "plannedQty": "45000",
+          "completedQty": "30000"
         }
       ]
     },
@@ -62,9 +71,12 @@
           "dateDiff": "0",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "BR001",
+          "orderId": "BO001",
           "orderType": "Boxers",
-          "quantity": "75000"
+          "quantity": "45000",
+          "isStarted": true,
+          "plannedQty": "45000",
+          "completedQty": "14200"
         }
       ]
     },
@@ -81,9 +93,13 @@
           "endDate": "7-Sep-2018",
           "client": "Ralph Lauren (FRA)",
           "duration": "21",
-          "orderId": "BR001",
+          "orderId": "BO005",
           "orderType": "Boxers",
-          "quantity": "75000"
+          "quantity": "75000",
+          "isStarted": true,
+          "plannedQty": "75000",
+          "completedQty": "14200",
+          "isBehind": true
         }
       ]
     },
@@ -100,9 +116,13 @@
           "endDate": "7-Sep-2018",
           "duration": "21",
           "client": "Ralph Lauren (FRA)",
-          "orderId": "SH002",
+          "orderId": "BR001",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "25000",
+          "isStarted": true,
+          "plannedQty": "25000",
+          "completedQty": "14200",
+          "isBehind": true
         }
       ]
     },
@@ -125,10 +145,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR002",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "250000",
+          "isStarted": true,
+          "plannedQty": "250000",
+          "completedQty": "102000"
         }
       ]
     },
@@ -144,10 +167,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR003",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "75000",
+          "isStarted": true,
+          "plannedQty": "75000",
+          "completedQty": "60000"
         }
       ]
     },
@@ -163,10 +189,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR004",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "55000",
+          "isStarted": true,
+          "plannedQty": "55000",
+          "completedQty": "50000"
         }
       ]
     },
@@ -182,10 +211,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR005",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "95000",
+          "isStarted": true,
+          "plannedQty": "95000",
+          "completedQty": "50000"
         }
       ]
     },
@@ -201,10 +233,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR006",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "25000",
+          "isStarted": true,
+          "plannedQty": "25000",
+          "completedQty": "10000"
         }
       ]
     },
@@ -220,10 +255,35 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR007",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "125000",
+          "isStarted": true,
+          "plannedQty": "125000",
+          "completedQty": "110000"
+        }
+      ]
+    },
+    {
+      "laneId": "3",
+      "itemType": "Briefs",
+      "capacity": "15000",
+      "current-capacity": "15000",
+      "orders": [
+        {
+          "laneId": "3",
+          "startDate": "18-Aug-2018",
+          "dateDiff": "3",
+          "endDate": "7-Sep-2018",
+          "duration": "4",
+          "orderId": "BR008",
+          "client": "Ralph Lauren (FRA)",
+          "orderType": "Briefs",
+          "quantity": "65000",
+          "isStarted": true,
+          "plannedQty": "65000",
+          "completedQty": "10000"
         }
       ]
     },
@@ -239,10 +299,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR009",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "85000",
+          "isStarted": true,
+          "plannedQty": "85000",
+          "completedQty": "10000"
         }
       ]
     },
@@ -258,10 +321,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR010",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "25000",
+          "isStarted": true,
+          "plannedQty": "25000",
+          "completedQty": "9000"
         }
       ]
     },
@@ -277,10 +343,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR011",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "125000",
+          "isStarted": true,
+          "plannedQty": "125000",
+          "completedQty": "10000"
         }
       ]
     },
@@ -296,10 +365,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR012",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "75000",
+          "isStarted": true,
+          "plannedQty": "75000",
+          "completedQty": "60000"
         }
       ]
     },
@@ -315,29 +387,13 @@
           "dateDiff": "3",
           "endDate": "7-Sep-2018",
           "duration": "21",
-          "orderId": "SH002",
+          "orderId": "BR013",
           "client": "Ralph Lauren (FRA)",
           "orderType": "Briefs",
-          "quantity": "25000"
-        }
-      ]
-    },
-    {
-      "laneId": "3",
-      "itemType": "Briefs",
-      "capacity": "15000",
-      "current-capacity": "15000",
-      "orders": [
-        {
-          "laneId": "3",
-          "startDate": "18-Aug-2018",
-          "dateDiff": "3",
-          "endDate": "7-Sep-2018",
-          "duration": "21",
-          "orderId": "SH002",
-          "client": "Ralph Lauren (FRA)",
-          "orderType": "Briefs",
-          "quantity": "25000"
+          "quantity": "125000",
+          "isStarted": true,
+          "plannedQty": "125000",
+          "completedQty": "60000"
         }
       ]
     },
