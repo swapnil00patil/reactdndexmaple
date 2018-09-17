@@ -13,7 +13,8 @@ const style = {
 	marginBottom: '1.5rem',
 	cursor: 'move',
 	float: 'left',
-	width: 160
+	width: 160,
+	color: 'white'
 }
 
 const boxSource = {
@@ -40,6 +41,12 @@ class Order extends React.Component {
 		if(order.deliveryDate) {
 			data.push({ title: 'Delivery Date', value: order.deliveryDate });
 		}
+		if(order.startDate) {
+			data.push({ title: 'Start Date', value: order.startDate });
+		}
+		if(order.endDate) {
+			data.push({ title: 'End Date', value: order.endDate });
+		}
 		if(order.totalQuantity) {
 			data.push({ title: 'Planned', value: order.totalQuantity });
 		} else if(order.quantity) {
@@ -48,6 +55,7 @@ class Order extends React.Component {
 		if(order.completedQuantity) {
 			data.push({ title: 'Completed', value: order.completedQuantity });
 		}
+		data.push({ title: 'Order ID', value: order.orderId });
 		return data;
 	}
 

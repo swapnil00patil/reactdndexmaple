@@ -7,9 +7,7 @@
         "client": "Arrow USA",
         "orderDate": "10-Aug-2018",
         "deliveryDate": "10-Sep-2018",
-        "orderStatus": "NEW",
-        "startDate": "18-Aug-2018",
-        "endDate": "7-Sep-2018"
+        "orderStatus": "NEW"
       },
       {
         "orderId": "BR100",
@@ -18,9 +16,7 @@
         "client": "Jockey (USA)",
         "orderDate": "12-Aug-2018",
         "deliveryDate": "12-Sep-2018",
-        "orderStatus": "PROGRESS",
-        "startDate": "18-Aug-2018",
-        "endDate": "7-Sep-2018"
+        "orderStatus": "PROGRESS"
       },
       {
         "orderId": "SH100",
@@ -29,9 +25,7 @@
         "client": "Ralph Lauren (FRA)",
         "orderDate": "08-Aug-2018",
         "deliveryDate": "15-Sep-2018",
-        "orderStatus": "PROGRESS",
-        "startDate": "18-Aug-2018",
-        "endDate": "7-Sep-2018"
+        "orderStatus": "PROGRESS"
       }
     ]
   }
